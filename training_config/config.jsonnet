@@ -9,7 +9,7 @@
     "token_indexers": {
       "bert": {
         "max_length": 512,
-        "model_name": "bert-base-uncased",
+        "model_name": "dccuchile/bert-base-spanish-wwm-cased",
         "type": "pretrained_transformer_mismatched"
       }
     },
@@ -20,7 +20,7 @@
       "token_embedders": {
         "bert": {
           "max_length": 512,
-          "model_name": "bert-base-uncased",
+          "model_name": "dccuchile/bert-base-spanish-wwm-cased",
           "type": "pretrained_transformer_mismatched"
         }
       }

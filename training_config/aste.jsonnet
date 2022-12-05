@@ -1,7 +1,7 @@
 local template = import "template.libsonnet";
 
 template.SpanModel {
-  bert_model: "bert-base-uncased",
+  bert_model: "dccuchile/bert-base-spanish-wwm-cased",
   cuda_device: 0,
   data_paths: {
     train: "/tmp/train.json",
