@@ -117,9 +117,14 @@ class SpanModel(BaseModel):
         precision = safe_divide(num_correct, num_pred)
         recall = safe_divide(num_correct, num_gold)
 
+        TP = num_correct
+        FN = TP - num_gold
+        FP = num_pred - TP
+
         info = dict(
-            path_pred=path_pred,
-            path_gold=path_gold,
+            TP = TP,
+            FN = FN,
+            FP = FP,
             precision=precision,
             recall=recall,
             score=safe_divide(2 * precision * recall, precision + recall),
@@ -128,7 +133,6 @@ class SpanModel(BaseModel):
 
 
 def run_train(path_train: str, path_dev: str, save_dir: str, random_seed: int):
-    print(dict(run_train=locals()))
     if Path(save_dir).exists():
         return
 
@@ -143,7 +147,6 @@ def run_train_many(save_dir_template: str, random_seeds: List[int], **kwargs):
 
 
 def run_eval(path_test: str, save_dir: str):
-    print(dict(run_eval=locals()))
     model = SpanModel(save_dir=save_dir, random_seed=0)
     path_pred = str(Path(save_dir) / "pred.txt")
     model.predict(path_test, path_pred)
