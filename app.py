@@ -66,7 +66,7 @@ def predecir(text):
   for t in sent.triples:
       target = " ".join(sent.tokens[t.t_start:t.t_end+1])
       opinion = " ".join(sent.tokens[t.o_start:t.o_end+1])
-      res.append(dict(target=target, opinion=opinion, sentiment=t.label))
+      res.append(dict(aspect=target, opinion=opinion, sentiment=t.label))
 
   return json.dumps(res)
 
@@ -74,11 +74,15 @@ def predecir(text):
 def kkck():
   return "KKCK"
 
-@app.route("/predict", methods = ['POST', 'GET'])
+@app.route("/api/predict", methods = ['POST', 'GET'])
 def home():
-  text = request.args.get('review')
-  print(text)
-  return predecir(text)
+  review = request.args.get('review')
+  print('-'*50)
+  print(review)
+  triplets = predecir(review)
+  print(triplets)
+  print('-'*50)
+  return triplets
 
 if __name__ == "__main__":
   app.run()
