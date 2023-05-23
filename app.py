@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_ngrok import run_with_ngrok
 app = Flask(__name__)
 run_with_ngrok(app)
@@ -68,7 +68,7 @@ def predecir(text):
       opinion = " ".join(sent.tokens[t.o_start:t.o_end+1])
       res.append(dict(aspect=target, opinion=opinion, sentiment=t.label))
 
-  return json.dumps(res)
+  return res
 
 @app.route("/kkck")
 def kkck():
@@ -82,7 +82,7 @@ def home():
   triplets = predecir(review)
   print(triplets)
   print('-'*50)
-  return triplets
+  return jsonify(triplets)
 
 if __name__ == "__main__":
   app.run()
