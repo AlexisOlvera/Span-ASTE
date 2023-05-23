@@ -12,5 +12,7 @@ scikit-learn==0.22.2.post1
 torch==1.7.0
 torchvision==0.8.1
 transformers==3.4.0
+flask
+flask_ngrok
 pyngrok==4.1.1
 boto3==1.16.46
