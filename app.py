@@ -61,14 +61,22 @@ def preprocesar(text):
 def predecir(text):
   model_dir = 'content/outputs/resESP/seed_17'
   model = SpanModel(save_dir=model_dir, random_seed=0)
-  sent = predict_sentence(preprocesar(text), model)
+  text = preprocesar(text)
+  sent = predict_sentence(text, model)
   res = []
   for t in sent.triples:
       target = " ".join(sent.tokens[t.t_start:t.t_end+1])
       opinion = " ".join(sent.tokens[t.o_start:t.o_end+1])
-      res.append(dict(aspect=target, opinion=opinion, sentiment=t.label, positions=[t.t_start, t.t_end, t.o_start, t.o_end]))
+      res.append(dict(
+        aspect=target,
+        opinion=opinion,
+        sentiment=t.label,
+        positions=dict(
+          aspect=[t.t_start, t.t_end],
+          opinion=[t.o_start, t.o_end]
+        )))
 
-  return res
+  return dict(review = text, triplets = res)
 
 @app.route("/kkck")
 def kkck():
