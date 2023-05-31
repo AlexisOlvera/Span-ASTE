@@ -14,12 +14,4 @@ if [[ -f wordnet.zip ]]; then
 	mkdir -p /home/admin/nltk_data/corpora
 	cp wordnet.zip /home/admin/nltk_data/corpora
 fi
-
-# Make sample data for quick debugging
-unzip -n data.zip -d aste/
-cd aste/data/triplet_data
-mkdir -p sample
-head -n 32 14lap/train.txt >sample/train.txt
-head -n 32 14lap/dev.txt >sample/dev.txt
-head -n 32 14lap/test.txt >sample/test.txt
 cd ../../..
