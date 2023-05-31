@@ -3,6 +3,7 @@ sys.path.append("aste")
 from pathlib import Path
 from data_utils import Data, Sentence, SplitEnum
 from wrapper import SpanModel
+import json
 
 random_seed = 17
 data_name = "monchi"
@@ -16,8 +17,5 @@ model.fit(path_train, path_dev)
 
 path_pred = "pred.txt"
 model.predict(path_in=path_test, path_out=path_pred)
-results = model.score(path_pred, path_test)
-print(json.dumps(results, indent=2))
-
 results = model.score(path_pred, path_test)
 print(json.dumps(results, indent=2))
