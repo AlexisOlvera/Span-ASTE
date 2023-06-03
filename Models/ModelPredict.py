@@ -38,8 +38,8 @@ class ModelPredict:
 
     def clean_tokens(self, text):
         text = text.lower()      # minus
-        text = self.accents(text)     # no acentos
-        text = self.replace_wrd(text) # reemplazo de palabras
+        text = self.accents(self, text)     # no acentos
+        text = self.replace_wrd(self, text) # reemplazo de palabras
 
         # Expresión regular para tokenización
 
@@ -53,14 +53,14 @@ class ModelPredict:
 
 
     def preprocesar(self, text):
-        return "RESTAURANTE " + ' '.join(self.clean_tokens(text)) + " RESTAURANTE"
+        return "RESTAURANTE " + ' '.join(self.clean_tokens(self, text)) + " RESTAURANTE"
 
     @classmethod
     def predecir(self, text):
         model_dir = 'monchi/seed_17'
         model = SpanModel(save_dir=model_dir, random_seed=0)
-        text = self.preprocesar(text)
-        sent = self.predict_sentence(text, model)
+        text = self.preprocesar(self, text)
+        sent = self.predict_sentence(self, text, model)
         res = []
         for t in sent.triples:
             target = " ".join(sent.tokens[t.t_start:t.t_end+1])
