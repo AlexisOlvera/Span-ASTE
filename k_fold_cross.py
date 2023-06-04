@@ -3,6 +3,9 @@ sys.path.append("aste")
 from pathlib import Path
 from data_utils import Data, Sentence, SplitEnum
 from wrapper import SpanModel
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 #@title K fold cross validation con dataset movil
 import json
@@ -92,3 +95,25 @@ file_stats.write("\n")
 file_stats.write(f"F1 Score promedio = {statistics.mean(f1_scores)}")
 file_stats.write("\n")
 file_stats.close()
+
+
+labels = ['K-1', 'K-2', 'K-3', 'K-4', 'K-5']
+
+x = np.arange(len(labels))  # the label locations
+width = 0.27  # the width of the bars
+
+fig, ax = plt.subplots()
+rects1 = ax.bar(x - width, precisions, width, label='Precision')
+rects2 = ax.bar(x, recalls, width, label='Recall')
+rects3 = ax.bar(x + width, f1_scores, width, label="F1 score")
+
+# Add some text for labels, title and custom x-axis tick labels, etc.
+ax.set_ylabel('Scores')
+ax.set_title('K fold cross validation')
+ax.set_xticks(x, labels)
+ax.legend()
+
+
+fig.tight_layout()
+
+plt.show()
