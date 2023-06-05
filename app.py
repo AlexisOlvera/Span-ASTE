@@ -5,18 +5,14 @@ run_with_ngrok(app)
 from Models.ModelPredict import ModelPredict
 #@title Obetener la tripleta a partir de una reseña
 
-@app.route("/kkck")
-def kkck():
-  return "KKCK"
+@app.route("/prueba")
+def prueba():
+  return "OK"
 
 @app.route("/api/predict", methods = ['POST', 'GET'])
-def home():
+def predict():
   review = request.args.get('review')
-  print('-'*50)
-  print(review)
   triplets = ModelPredict.predecir(review)
-  print(triplets)
-  print('-'*50)
   return jsonify(triplets)
 
 if __name__ == "__main__":
